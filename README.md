@@ -1,7 +1,7 @@
-# Depressão1.0-master
+# Depressão1.0.1-master
 
 Dependências a serem instaladas:
-Instalação do node.js (Reinicie o VS Code)
+Instalação do node.js (Reinicie o VS Code) \n
 	https://nodejs.org/en/download/
 Para uso do GitHub é necessário instalar o GIT no dispositivo:
         https://git-scm.com/
