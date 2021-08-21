@@ -65,5 +65,6 @@ Agora já esta conectado ao dialogflow, qualquer alteração feita no arquivo in
 
     git commit -m "commit" path/file (Faça o commit com as modificações realizadas).
     git push 
+    t
 
 # Faça Push apenas nos arquivos com código, um push completo enviará todos as dependências do Node e Firebase
