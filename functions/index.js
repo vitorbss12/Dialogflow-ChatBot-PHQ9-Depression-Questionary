@@ -230,7 +230,7 @@ function depressionTest(agent) {
   dpResult = rp1+rp2+rp3+rp4+rp5+rp6+rp7+rp8+rp9;
 
   if(dpResult >= 0 && dpResult <= 4 ) {
-    agent.add(lastuser +' sua pontuação foi: ' + dpResult + ' - Sem depressão');
+    agent.add(lastuser +' sua pontuação foi: ' + dpResult + ' - TESTE Sem depressão');
   } else if(dpResult >= 5 && dpResult <= 9) {
     agent.add(lastuser +' sua pontuação foi: ' + dpResult + ' - Transtorno depressivo leve');
   } else if(dpResult >= 10 && dpResult <= 14) {
