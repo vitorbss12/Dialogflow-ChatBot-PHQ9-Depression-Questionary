@@ -58,6 +58,7 @@ Agora já esta conectado ao dialogflow, qualquer alteração feita no arquivo in
     
 
     Após alteração em algum arquivo para salvar alteraçõe no GitHub:
+    git remote add origin https://github.com/vitorbss12/depressao1.0.1-master.git
     git branch -M main
 
     Add index.js
@@ -65,6 +66,7 @@ Agora já esta conectado ao dialogflow, qualquer alteração feita no arquivo in
 
     git commit -m "commit" path/file (Faça o commit com as modificações realizadas).
     git push 
-    t
-
+    or
+    git push origin main
+    
 # Faça Push apenas nos arquivos com código, um push completo enviará todos as dependências do Node e Firebase
