@@ -4,7 +4,7 @@ Dependências a serem instaladas:
 Instalação do node.js (Reinicie o VS Code)
     https://nodejs.org/en/download/
 Para uso do GitHub é necessário instalar o GIT no dispositivo:
-        https://git-scm.com/
+    https://git-scm.com/
 
 É IMPORTANTE SEMPRE O USO DO TERMINAL CMD NO VSCODE (NÃO POWERSHELL)
 
