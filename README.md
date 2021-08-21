@@ -9,7 +9,7 @@ Para uso do GitHub é necessário instalar o GIT no dispositivo:
 É IMPORTANTE SEMPRE O USO DO TERMINAL CMD NO VSCODE (NÃO POWERSHELL)
 
 # Clonar repositório:
-git clone https://github.com/vitorbss12/depressao1.0-master.git
+git clone https://github.com/vitorbss12/depressao1.0.1-master.git
 
 Caso clone o projeto em uma pasta especifica mude para a pasta raiz do projeto
     cd depressão1.0-master
@@ -33,15 +33,15 @@ Instalação dos pacotes npm – Gerenciados Node.js *NA PASTA FUNCTIONS
         *Yes para o CLI
     Faça o login na conta google que vai estar linkada ao projeto. Caso o navegador não inicie automaticamente, basta clicar na URL lançada no terminal.
     Para acessar o projeto com diretorio já configurado (Que vamos usar nos projetos da PIBIC)
-	firebase use depwhats-syptni
+	firebase use depress-o1-0-1-perw
  
 Agora já esta conectado ao dialogflow, qualquer alteração feita no arquivo index.js sera enviado para o dialogflow. Após alteração basta um deploy.
 	firebase deploy (sempre salvar o arquivo antes de fazer o deploy, atalho ctrl + S)
 
     O Firebase Deploy pode demorar, principalmente na primeira execução. Por conta da atualização do Node.js
     Para testes é possivel usar a versão demo do Bot, no painel do dialogflow basta ir em integrations -> web demo -> Selecionar o link na parte superior.
-    O link da versão 1 e:
-    https://bot.dialogflow.com/3cd7d233-f4b6-40a8-9d33-291a250fe295
+    O link da versão 1.0.1 é:
+    https://bot.dialogflow.com/e301d948-7c0b-4a4c-8e56-c0123a2d1165
 
 # Pull request GitHub
     No canto inferior esquerdo do Visual Code Studio é possivel fazer login usando a conta criada no GitHub, isso facilitará o acesso as permissões do projeto. 
