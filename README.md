@@ -26,8 +26,12 @@ Instalação dos pacotes npm – Gerenciados Node.js *NA PASTA FUNCTIONS
 
 **instalação das dependencias (Caso de erro)
 
-	    npm install firebase-functions@3.7.0
-	    npm install firebase-admin@^8.0.0
+        npm install firebase-functions@3.7.0
+        npm install firebase-admin@^8.0.0
+
+Instalação do mySQL
+
+        npm install mysql
 
 # Instalação firebase tools
 
