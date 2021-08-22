@@ -32,7 +32,7 @@ Instalação dos pacotes npm – Gerenciados Node.js *NA PASTA FUNCTIONS
 Instalação do mySQL
 
         npm install mysql
-
+        
 # Instalação firebase tools
 
 Ainda na pasta functions
