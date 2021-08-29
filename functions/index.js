@@ -32,8 +32,13 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
   var MYSQL_USER = "bancopibic"; 
   var MYSQL_PASS = "bancopibic2021";
   var MYSQL_DB = "bancopibic";
-  var lastusername = "none";
-  var lastname = "none";
+
+  var userFlag;
+  
+  function userflagupdate (user_email) {
+    userFlag = user_email;
+    console.log('teste userflagupdate: ' + userFlag);
+  }
 
   function welcome (agent) {
     agent.add(`Welcome to my agent!`);
@@ -67,6 +72,14 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
     });
    }
 
+   function insertIntoDatabasePSICO(connection, data){
+  	return new Promise((resolve, reject) => {
+      connection.query('INSERT INTO usuarios SET ?', data, (error, results, fields) => {
+        resolve(results);
+      });
+    });
+   }
+
 //create user to database
   function CreateUsers (agent) {
 	const data = {
@@ -74,8 +87,6 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
 		username: agent.parameters.username,
 		pass: agent.parameters.pass
 	};
-  //lastname = data.name;
-  //lastusername = data.username;
 	return connectToDatabase()
 	.then(connection => {
 		return insertIntoDatabase(connection, data)
@@ -95,44 +106,32 @@ function queryDatabase(connection){
     });
 }
 
-//read login informations
-//function Login(agent){
-//  return connectToDatabase()
-//  .then(connection => {
-//    return queryDatabase(connection)
-//    .then(result => {
-//      agent.add(`First name: ${result[0].name}`)
-//      connection.end();
-//    });
-//  });
-//}
-
-//read login informations
+//login function
 function Login(agent){
-  const loginemail = agent.parameters.username;
-  const loginpass = agent.parameters.loginpass;
+  const user_email = agent.parameters.user_email;
+  const user_pass = agent.parameters.user_pass;
   return connectToDatabase()
   .then(connection => {
     return queryDatabase(connection)
     .then(result => {
-      console.log(result);
       result.map(usuarios => {
-        if(loginemail === usuarios.username){
-          if(loginpass === usuarios.pass) {
-            //lastname = usuarios.name;
-            //lastusername = usuarios.username;
+        userflagupdate(user_email);
+        if(user_email === usuarios.username){
+          if(user_pass === usuarios.pass) {
             agent.add(`Que bom te ter de volta ${usuarios.name}`);
-            //agent.add(`First Name: ${usuarios.name}`);
-          } else {
-            agent.add(`Senha incorreta. Digite "Login" para tentar novamente ou "Criar" para criar usuário.`);
-          };
-        } else {
-          agent.add(`Usuário não encontrado. Digite "Login" para tentar novamente ou "Criar" para criar usuário.`);
-        };
-      });     
-      connection.end();
+          }
+          else agent.add(`Senha incorreta. Digite "Login" para tentar novamente ou "Criar" para criar usuário.`);
+        }
+        //else agent.add(`Senha incorreta. Digite "Login" para tentar novamente ou "Criar" para criar usuário.`);
+      });   
+    connection.end();
     });
   });
+}
+
+function testconect(agent) {
+  agent.add(`email = ` + userFlag);
+  console.log(`testeconect: ` + userFlag);
 }
 
 function depressionTest(agent) {
@@ -230,15 +229,15 @@ function depressionTest(agent) {
   dpResult = rp1+rp2+rp3+rp4+rp5+rp6+rp7+rp8+rp9;
 
   if(dpResult >= 0 && dpResult <= 4 ) {
-    agent.add(lastuser +' sua pontuação foi: ' + dpResult + ' - T Sem depressão');
+    agent.add(nameflag +' sua pontuação foi: ' + dpResult + ' - Sem depressão');
   } else if(dpResult >= 5 && dpResult <= 9) {
-    agent.add(lastuser +' sua pontuação foi: ' + dpResult + ' - Transtorno depressivo leve');
+    agent.add(nameflag +' sua pontuação foi: ' + dpResult + ' - Transtorno depressivo leve');
   } else if(dpResult >= 10 && dpResult <= 14) {
-    agent.add(lastuser +' sua pontuação foi: ' + dpResult + ' - Transtorno depressivo moderado');
+    agent.add(nameflag +' sua pontuação foi: ' + dpResult + ' - Transtorno depressivo moderado');
   } else if(dpResult >= 15 && dpResult <= 19) {
-    agent.add(lastuser +' sua pontuação foi: ' + dpResult + ' - Transtorno depressivo moderadamente grave');
+    agent.add(nameflag +' sua pontuação foi: ' + dpResult + ' - Transtorno depressivo moderadamente grave');
   } else if(dpResult >= 20 && dpResult <= 27) {
-    agent.add(lastuser +' sua pontuação foi: ' + dpResult + ' - Transtorno depressivo grave');
+    agent.add(nameflag +' sua pontuação foi: ' + dpResult + ' - Transtorno depressivo grave');
   };
 }
 
@@ -276,6 +275,7 @@ function depressionTest(agent) {
   intentMap.set('CreateUsers', CreateUsers);
   intentMap.set('Login', Login);
   intentMap.set('PHQ-9', depressionTest);
+  intentMap.set('testconect', testconect)
   // intentMap.set('<INTENT_NAME_HERE>', googleAssistantHandler);
   agent.handleRequest(intentMap);
 });
