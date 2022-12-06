@@ -1,5 +1,4 @@
-# Depressão1.0.1-master
-
+# ChatBot - Aplicação Questionário PHQ-9
 Dependências a serem instaladas:
 Instalação do node.js (Reinicie o VS Code)
 
@@ -12,8 +11,6 @@ Para uso do GitHub é necessário instalar o GIT no dispositivo:
 É IMPORTANTE SEMPRE O USO DO TERMINAL CMD NO VSCODE (NÃO POWERSHELL)
 
 # Clonar repositório:
-git clone https://github.com/vitorbss12/depressao1.0.1-master.git
-
 Caso clone o projeto em uma pasta especifica mude para a pasta raiz do projeto
 
         cd depressão1.0-master
@@ -33,34 +30,28 @@ Instalação do mySQL
 
         npm install mysql
         
-# Instalação firebase tools
-
-Ainda na pasta functions
+Instalação firebase tools
 
         npm install -g firebase-tools
 
 Login no firebase para pode fazer o deploy do código
 
         firebase login
-*Yes para o CLI
+        *Yes para o CLI
     
 Faça o login na conta google que vai estar linkada ao projeto. Caso o navegador não inicie automaticamente, basta clicar na URL lançada no terminal.
-Para acessar o projeto com diretorio já configurado (Que vamos usar nos projetos da PIBIC)
+Para acessar o projeto com diretorio já configurado.
 
-    	firebase use depress-o1-0-1-perw
+    	firebase use NOME_DO_PROJETO
  
-Agora já esta conectado ao dialogflow, qualquer alteração feita no arquivo index.js sera enviado para o dialogflow. Após alteração basta um deploy.
+Agora já esta conectado ao Dialogflow, qualquer alteração feita no arquivo index.js sera enviado para o dialogflow. Após alteração basta um deploy.
 
     	firebase deploy
 
- (sempre salvar o arquivo antes de fazer o deploy, atalho ctrl + S)
+O Firebase Deploy pode demorar, principalmente na primeira execução.
+Para testes é possível usar a versão demo do Bot, no painel do Dialogflow basta ir em integrations -> web demo -> Selecionar o link na parte superior.
 
-O Firebase Deploy pode demorar, principalmente na primeira execução. Por conta da atualização do Node.js
-Para testes é possivel usar a versão demo do Bot, no painel do dialogflow basta ir em integrations -> web demo -> Selecionar o link na parte superior.
-
-O link da versão 1.0.1 é:
-
-    https://bot.dialogflow.com/e301d948-7c0b-4a4c-8e56-c0123a2d1165
+DEMO: https://bot.dialogflow.com/e301d948-7c0b-4a4c-8e56-c0123a2d1165
 
 # Pull request GitHub
 No canto inferior esquerdo do Visual Code Studio é possivel fazer login usando a conta criada no GitHub, isso facilitará o acesso as permissões do projeto. 
@@ -68,31 +59,40 @@ Caso seu VS Code não esteja conectado ao GitHub basta instalar a última atuali
 GitHub Pull Requests and Issues ou Solicitações de pull e problemas do GitHub
 
 Na Pasta Raiz
-
         cd ..
-        git init
 
 Após instalação declarar seu e-mail e usuário no CMD;
-
         git config --global user.email "you@example.com"
         git config --global user.name "Your Name"
 
-Após alteração em algum arquivo para salvar alteraçõe no GitHub:
+Crie uma branch para alteração do código
+        git checkout -b NOME_DA_BRANCH
 
-        git remote add origin https://github.com/vitorbss12/depressao1.0.1-master.git
-        git branch -M main
+Após alteração em algum arquivo para salvar alteraçõe no GitHub:
+        git add .
+        git commit -m "MENSAGEM"
+        git push origin NOME_DA_BRANCH
 
 Adicionar index.js (Assim como aquivos na pasta Functions, isso se dá por um conflito no Firebase e GitHub)
 
         git add functions/index.js
-        git commit -m "commit" path/file
-        
-(Faça o commit com as modificações realizadas).
+        git commit -m "MENSAGEM"
+        git push origin NOME_DA_BRANCH
 
-        git push
+# Variáveis de ambiente:
 
-ou
-    
-        git push origin main
-    
-# Faça Push apenas nos arquivos com código, um push completo enviará todos as dependências do Node e Firebase
+Alterar o nome do arquivo .env.example para .env e adicionar as variáveis de ambiente, substituindo os valores pelas informações do seu banco de dados.
+
+Caso as variáveis não estejam funcionando no arquivo .env, remova o trecho do index.js e faça a atribuição manualmente.
+````JavaScript
+const dotenv = require("dotenv");
+dotenv.config();
+````
+
+Alterações manuais
+````JavaScript
+var MYSQL_HOST = "HOST";
+var MYSQL_USER = "USER";
+var MYSQL_PASS = "PASS";
+var MYSQL_DB = "DB";
+````
